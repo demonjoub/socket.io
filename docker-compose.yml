@@ -1,0 +1,14 @@
+version: "3"
+services: 
+  chat-app:
+    container_name: chat-app
+    image: chat-app
+    command: npm run prod
+    restart: always
+    build: ./
+    working_dir: /app
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+    - "3000:3000"

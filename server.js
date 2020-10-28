@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
     socket.to(room).broadcast.emit("user-connected", name);
   });
   socket.on("send-chat-message", (room, message) => {
-    const myRoom = _.get(rooms, "room");
+    const myRoom = _.get(rooms, `${room}`);
     const users = _.get(myRoom, "users");
     const userName = _.get(users, `${socket.id}`);
     socket.to(room).broadcast.emit("chat-message", {
@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
   });
   socket.on("disconnect", () => {
     getUserRooms(socket).forEach((room) => {
-      const myRoom = _.get(rooms, "room");
+      const myRoom = _.get(rooms, `${room}`);
       const users = _.get(myRoom, "users");
       const userName = _.get(users, `${socket.id}`);
 
